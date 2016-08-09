@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+
+<div id="welcomeMessage"></div>
+
+<script type="text/javascript">
+    
+
+
+    window.onload = function() {
+
+
+       var username = localStorage.getItem('username');
+
+  if (username != "undefined" || username != "null") {
+    document.getElementById('welcomeMessage').innerHTML = "Hello " + username + "!";
+  } else{
+    document.getElementById('welcomeMessage').innerHTML = "Hello!";
+  }
+
+  }
+
+
+</script>
+
+
+
+</body>
+
+</html>
