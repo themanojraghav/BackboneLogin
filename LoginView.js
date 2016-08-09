@@ -23,7 +23,7 @@ _.extend(Backbone.Validation.callbacks, {
 // Define a model with some validation rules
 var SignUpModel = Backbone.Model.extend({
     defaults: {
-        country: 'Norway'
+        
     },
     validation: {
         username: {
