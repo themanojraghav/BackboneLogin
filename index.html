@@ -25,13 +25,7 @@ form {
             <span class="help-block hidden"></span>
         </div>
     </div>
-    <div class="form-group">
-        <label for="email" class="col-lg-2 control-label">Email</label>
-        <div class="col-lg-10">
-            <input type="email" class="form-control" id="email" name="email" />
-            <span class="help-block hidden"></span>
-        </div>
-    </div>
+   
     <div class="form-group">
         <label for="password" class="col-lg-2 control-label">Password</label>
         <div class="col-lg-10">
@@ -75,12 +69,6 @@ form {
        var username = localStorage.getItem('username');
 
 
-
-  if (username != "undefined" || username != "null") {
-    document.getElementById('welcomeMessage').innerHTML = "Hello " + username + "!";
-  } else{
-    document.getElementById('welcomeMessage').innerHTML = "Hello!";
-  }
 
   }
 

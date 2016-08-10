@@ -29,11 +29,7 @@ var SignUpModel = Backbone.Model.extend({
         username: {
             required: true
         },
-        email: {
-            required: true,
-            pattern: 'email'
-        },
-        password: {
+            password: {
             minLength: 8
         }
        
@@ -55,12 +51,7 @@ var SignUpForm = Backbone.View.extend({
                 validate: true
             }
         },
-        '[name=email]': {
-            observe: 'email',
-            setOptions: {
-                validate: true
-            }
-        },
+        
         '[name=password]': {
             observe: 'password',
             setOptions: {
@@ -81,25 +72,23 @@ var SignUpForm = Backbone.View.extend({
     signUp: function () {
 
 
-       var user= this.model.get('username');
-            var email = this.model.get('email');
+            var user= this.model.get('username');
+            var password = this.model.get('password');
+            var ss ="http://70.38.37.105:1060/ProductwithlocalAPI/WebAPI/api/v1/UIHelper/CheckLogin?username=admin&password=admin123";
         if(this.model.isValid(true)) {
-    $.getJSON("http://70.38.37.105:1060/ProductwithlocalAPI/WebAPI/api/v1/UIHelper/CheckLogin?username=admin&password=admin123", function(result){
+   
+ var userdata = showResult(parseURL(ss));
+        
 
-        $.each(result, function(i, field){
-
-          var dUserEmail = field[0].EmailId;
-            var dUserName = $.trim(field[0].UserName);
-            var dName = field[0].Name;
-
-            if(user == dUserName && email == dUserEmail ){
+     
+            if(user == userdata.username && password == userdata.password){
               window.location = "home.html";
             }else{
-              alert(' Enter valid username and email');
+              alert(' Enter valid username and password');
 
             } 
-        });
-    });
+       
+    
 
             
         }
@@ -110,7 +99,46 @@ var SignUpForm = Backbone.View.extend({
         return Backbone.View.prototype.remove.apply(this, arguments);
     }
 });
+    
 
+function parseURL(url) {
+    var a = document.createElement('a');
+    a.href = url;
+    return {
+      
+        params: (function () {
+            var ret = {},
+            seg = a.search.replace(/^\?/, '').split('&'),
+                len = seg.length,
+                i = 0,
+                s;
+            for (; i < len; i++) {
+                if (!seg[i]) {
+                    continue;
+                }
+                s = seg[i].split('=');
+                ret[s[0]] = s[1];
+            }
+            return ret;
+        })(),
+      
+    };
+}
+
+
+function showResult(parsedData) {   
+   // var obj = {};
+
+// alert(parsedData.params['username']);
+//alert(parsedData.params['password']);
+return parsedData.params;
+
+}
+
+// window.onload= function () {
+    
+//     showResult(parseURL(ss));
+// };
 $(function () {
     var view = new SignUpForm({
         el: 'form',
